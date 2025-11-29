@@ -16,5 +16,13 @@ namespace HealthCare.Models
 
         public decimal Fee { get; set; }
         public bool IsActive { get; set; }
+
+        //navigation
+        //these are available for each doctors
+        public ICollection<Appointment>? Appointments { get; set; }
+        public ICollection<Consultation>? Consultations { get; set; }
+        public ICollection<LabTestRequest>? LabTestsOrdered { get; set; }
+        public ICollection<Prescription>? Prescriptions { get; set; }
+
     }
 }
