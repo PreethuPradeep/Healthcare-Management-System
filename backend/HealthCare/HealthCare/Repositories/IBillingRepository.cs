@@ -1,0 +1,15 @@
+using HealthCare.Models;
+
+namespace HealthCare.Repositories
+{
+    public interface IBillingRepository
+    {
+        Task<IEnumerable<Billing>> GetAllAsync();
+        Task<Billing?> GetByIdAsync(int id);
+        Task<IEnumerable<Billing>> GetByPatientAsync(int patientId);
+        Task<Billing> AddAsync(Billing billing);
+        Task<Billing?> UpdateAsync(int id, Billing billing);
+        Task<bool> DeleteAsync(int id);
+    }
+}
+
