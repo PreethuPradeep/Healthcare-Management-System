@@ -8,7 +8,16 @@ It supports **role-based access** for Admin, Doctor, and Receptionist users, ens
 This project was developed by a team, with me as the **team lead**, focusing on full-stack development, architecture, Git collaboration, and clean code practices.
 
 ---
+##  Objectives
 
+| Goal | Description |
+|------|-------------|
+| Centralization | Combine major clinic operations into one system. |
+| Patient Experience | Provide access to appointments, lab reports, and prescriptions. |
+| Collaboration | Improve communication between clinical staff. |
+| Security | Protect patient health information (PHI). |
+
+---
 ##  Tech Stack
 
 ### **Frontend**
@@ -31,28 +40,44 @@ This project was developed by a team, with me as the **team lead**, focusing on 
 
 ---
 
-##  Features
+## Features by Role
 
-###  **Role-Based Authentication**
-- Admin, Doctor, Receptionist roles  
-- Secure JWT-based login  
-- Route guards on the frontend  
+### **Admin**
+| Feature | Description |
+|---------|-------------|
+| User Management | Create/update users & roles (RBAC). |
+| Master Data | Manage departments, lab tests, medicines. |
+| Reporting | Operational & revenue reports. |
+| Auditing | Logs for all CRUD operations. |
 
-###  **Admin Features**
-- Manage doctors  
-- Manage receptionist/staff accounts  
-- View clinic-wide analytics (if applicable)
+### **Receptionist**
+| Feature | Description |
+|---------|-------------|
+| Patient Registration | Add & update patient details. |
+| Appointment Scheduling | Book, edit, cancel, queue handling. |
+| Billing | Generate invoices & record payments. |
 
-###  **Receptionist Features**
-- Add/View/Edit patients  
-- Schedule and manage appointments  
-- Check doctor availability  
-- Simple dashboard
+### **Doctor**
+| Feature | Description |
+|---------|-------------|
+| Appointments | View & manage daily schedule. |
+| SOAP Notes | Record subjective, objective, assessment, plan. |
+| E-Prescriptions | Issue digital prescriptions. |
+| Lab Orders | Request lab tests and review results. |
 
-###  **Doctor Features**
-- View assigned appointments  
-- View patient details  
-- Update consultation notes (if added)
+### **Pharmacist**
+| Feature | Description |
+|---------|-------------|
+| Prescription Handling | Verify and dispense medicines. |
+| Inventory | Manage stock, batch numbers, expiry. |
+| Purchase Orders | Handle procurements. |
+
+### **Lab Technician**
+| Feature | Description |
+|---------|-------------|
+| Lab Orders | Receive and process test orders. |
+| Sample Tracking | Manage collection and workflow. |
+| Lab Results | Enter & validate results. |
 
 ### ⚙️ **General System Features**
 - Reusable UI components  
@@ -62,7 +87,21 @@ This project was developed by a team, with me as the **team lead**, focusing on 
 - Fully modular Angular structure  
 
 ---
+## Architecture Overview
 
+Angular Frontend
+↓
+ASP.NET Core API Controllers
+↓
+Services (Business Logic)
+↓
+Repositories
+↓
+Entity Framework Core
+↓
+SQL Server
+
+---
 ##  Project Structure
 
 ### **Backend**
@@ -88,13 +127,59 @@ Program.cs
 /models
 /guards
 
+---
+## Database Structure (High Level)
+
+### Core Tables
+
+| Table | Purpose |
+|--------|---------|
+| **Users** | Staff information (Name, Email, Phone, PasswordHash, RoleId). |
+| **Roles** | RBAC role definitions. |
+| **Patients** | Patient demographics. |
+| **Appointments** | Scheduling records. |
+| **Consultations** | SOAP notes and history. |
+| **Medicines** | Medicine master + inventory. |
+| **Prescriptions** | Items prescribed by doctors. |
+| **LabTests** | Test definitions + metadata. |
+| **LabResults** | Released lab results. |
+| **Billing** | Invoices and payments. |
+
+---
+## Non-Functional Requirements
+
+### **Security**
+
+| Requirement | Details |
+|-------------|---------|
+| Encryption | AES-256 for PHI at rest (if used). |
+| Authentication | JWT-based login. |
+| Authorization | Strict RBAC per module. |
+| Audit Logging | Logged on all CRUD actions. |
+
+### **Performance**
+
+| Requirement | Target |
+|-------------|--------|
+| API Response | < 2 seconds |
+| Concurrency | 500+ users |
+
+### **Availability**
+
+| Requirement | Target |
+|-------------|--------|
+| Uptime | 99.9% |
+| Database Backups | Automated daily backup |
+
+---
+
 ##  Running the Project
 
 ### **Backend**
 1. Clone the repository  
 2. Update the database connection string in `appsettings.json`  
 3. Run migrations: `update-database`
-4. 4. Start the API:  
+4.  Start the API:  
 
 ### **Frontend**
 1. Navigate to the Angular project folder  
@@ -124,7 +209,15 @@ I served as the **Team Lead**, responsible for:
 - Ensuring project consistency and deadlines
 
 ---
+## Team
 
+| Role         | Member                                             |
+| ------------ | -------------------------------------------------- |
+| Team         | Unhackables                                        |
+| Contributors | Preethu Pradeep, Chythra Raj, Libiya JM, Anjali VB |
+| Reviewer     | Sahadan Sir                                        |
+
+---
 ##  License
 Open-source for learning and portfolio purposes.
 
